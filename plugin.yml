@@ -1,6 +1,6 @@
 name: BossPlugin
 version: 3.22
-api: 4.0.0
+api: 3.19.0
 author: HmmHmmmmm
 main: hmmhmmmm\boss\Boss
 website: https://github.com/HmmHmmmm/BossPlugin
