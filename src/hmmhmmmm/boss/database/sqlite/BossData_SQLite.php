@@ -19,16 +19,11 @@ class BossData_SQLite implements Database{
    public function __construct(string $db_name){
       $this->plugin = Boss::getInstance();
       $this->db_name = $db_name;
-      $mc = $this->plugin->getConfig()->getNested("MySQL-Info");
       $libasynql_friendly_config = [
          "type" => $this->plugin->getConfig()->getNested("bossdata-database"),
          "sqlite" => [
             "file" => $this->plugin->getDataFolder()."boss.sqlite3"
          ],
-         "mysql" => array_combine(
-            ["host", "username", "password", "schema", "port"],
-            [$mc["Host"], $mc["User"], $mc["Password"], $mc["Database"], $mc["Port"]]
-         )
       ];
       $this->db = libasynql::create($this->plugin, $libasynql_friendly_config, [
          "sqlite" => "sqlite.sql",
