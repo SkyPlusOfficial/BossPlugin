@@ -34,16 +34,18 @@ class BossTask extends Task{
          if(BossData::getRespawnTime($name) <= 0){
             $levelFolderName = BossData::getLevelFolderName($name);
             if(!file_exists($this->plugin->getServer()->getDataPath()."worlds/".$levelFolderName)){
-               $plugin->getLogger()->error("§cBoss ".$name ." will not respawn because not found  world ".$levelFolderName);
+               $this->getPlugin()->getLogger()->error("§cBoss ".$name ." will not respawn because not found  world ".$levelFolderName);
                BossData::setRespawnTime($name, BossData::getIsRespawnTime($name));
             }
             $pos = BossData::getSpawn($name);
             $level = $pos->getLevel();
-            if(count($level->getPlayers()) == 0){
-               BossData::setRespawnTime($name, 30);
-            }else{
-               BossManager::respawn($name);
-               BossData::setRespawnTime($name, BossData::getIsRespawnTime($name));
+            if($level !== null){
+                if(count($level->getPlayers()) == 0){
+                    BossData::setRespawnTime($name, 30);
+                }else{
+                    BossManager::respawn($name);
+                    BossData::setRespawnTime($name, BossData::getIsRespawnTime($name));
+                }
             }
          }
       }
